@@ -1,8 +1,9 @@
 // variables to keep track of quiz state
 var currentQuestionIndex = 0;
-var time = questions.length * 15;
+var time = 75;
 var timerId;
 var score = 0;
+
 
 // variables to reference DOM elements
 var questionsEl = document.getElementById("questions");
@@ -15,8 +16,8 @@ var feedbackEl = document.getElementById("feedback");
 var questionTitle = document.getElementById("question-title")
 
 // sound effects
-var sfxRight = new Audio("assets/sfx/correct.wav");
-var sfxWrong = new Audio("assets/sfx/incorrect.wav");
+var sfxRight = new Audio("Develop/assets/sfx/correct.wav");
+var sfxWrong = new Audio("Develop/assets/sfx/incorrect.wav");
 var myInterval;
 
 function startQuiz() {
