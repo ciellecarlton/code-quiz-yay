@@ -35,8 +35,9 @@ function startQuiz() {
     timerEl.textContent = time;
 
     if (time <= 0) {
-      alert("Game Over ");
-      clearInterval(myInterval);
+      console.log("Game Over ");
+  
+      quizEnd()
     }
 
   }, 1000);
@@ -69,20 +70,22 @@ function getQuestion() {
       // answerClick(input)
       if (questions[currentQuestionIndex].answer !== input) {
         // reduce 10 from the counter
-        time = time - 10;
+        time = time - 10
         sfxWrong.play();
         feedbackEl.textContent = "Wrong!";
+      }
+      else{
+        sfxRight.play();
+        feedbackEl.textContent = "Correct!";
       }
 
       currentQuestionIndex++
       if (currentQuestionIndex === questions.length) {
-        // add points 
-        sfxRight.play();
-        feedbackEl.textContent = "Correct!";
-        
-        // got to results
-        alert("Game Over ");
-        clearInterval(myInterval);
+
+        //got to results
+        console.log("Game Over ");
+  
+        quizEnd()
       }
       else {
         getQuestion()
@@ -120,13 +123,14 @@ function questionClick(event) {
 
 function quizEnd() {
   // stop timer
+  clearInterval(myInterval);
   // show end screen
 var endScreen = document.getElementById("end-screen");
 endScreen.removeAttribute("class");
-  // show final score
-
+  // show final score // score is the time remaining
+document.getElementById("final-score").textContent = time;
   // hide questions section
-
+document.getElementById("questions").style.display = "none";
   // show a form the get the initialss and save the initial + score in the localstoraget
 }
 
