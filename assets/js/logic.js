@@ -14,10 +14,11 @@ var startBtn = document.getElementById("start");
 var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
 var questionTitle = document.getElementById("question-title")
+// var endScreen = document.getElementById("end-screen");
 
 // sound effects
-var sfxRight = new Audio("Develop/assets/sfx/correct.wav");
-var sfxWrong = new Audio("Develop/assets/sfx/incorrect.wav");
+var sfxRight = new Audio("assets/sfx/correct.wav");
+var sfxWrong = new Audio("assets/sfx/incorrect.wav");
 var myInterval;
 
 function startQuiz() {
@@ -68,11 +69,17 @@ function getQuestion() {
       // answerClick(input)
       if (questions[currentQuestionIndex].answer !== input) {
         // reduce 10 from the counter
-        time = time - 10
+        time = time - 10;
+        sfxWrong.play();
+        feedbackEl.textContent = "Wrong!";
       }
 
       currentQuestionIndex++
       if (currentQuestionIndex === questions.length) {
+        // add points 
+        sfxRight.play();
+        feedbackEl.textContent = "Correct!";
+        
         // got to results
         alert("Game Over ");
         clearInterval(myInterval);
@@ -103,29 +110,19 @@ function questionClick(event) {
 
     // play "wrong" sound effect
     sfxWrong.play();
-
     feedbackEl.textContent = "Wrong!";
   } else {
     // play "right" sound effect
     sfxRight.play();
     feedbackEl.textContent = "Correct!";
   }
-
-  // flash right/wrong feedback on page for half a second
-
-  // move to next question
-
-  // check if we've run out of questions
-  // quizEnd
-  // else 
-  // getQuestion
 }
 
 function quizEnd() {
   // stop timer
-
   // show end screen
-
+var endScreen = document.getElementById("end-screen");
+endScreen.removeAttribute("class");
   // show final score
 
   // hide questions section
